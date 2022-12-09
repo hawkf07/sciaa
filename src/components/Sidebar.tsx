@@ -29,8 +29,8 @@ export const Sidebar = () => {
   const router = useRouter();
   return (
     <aside className="w-64 rounded bg-gray-500/20  p-3">
-      <header>
-        <h1>Menu</h1>
+      <header className="w-full p-1 text-gray-200">
+        <h1 className="text-2xl">Menu</h1>
       </header>
       <div className="flex w-full flex-col gap-3">
         {sidebarMenuItem.map((item) => (

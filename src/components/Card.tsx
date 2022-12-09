@@ -14,7 +14,7 @@ type Card = z.infer<typeof CardScheme>;
 
 const Card: FC<Card> = ({ title, hashtags, description }) => {
   return (
-    <article className="mx-5 mt-5 max-w-sm overflow-hidden rounded-lg bg-gray-600/50 text-gray-200 shadow ">
+    <article className="mx-5  w-full overflow-hidden rounded-lg bg-gray-600/50 text-gray-200 shadow sm:max-w-sm md:max-w-md lg:max-w-lg ">
       <Image
         className="w-full"
         src="https://via.placeholder.com/640x360"
