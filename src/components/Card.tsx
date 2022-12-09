@@ -1,9 +1,20 @@
 import Image from "next/image";
-import { FC } from "react";
+import Link from "next/link";
+import type { FC } from "react";
+import z from "zod";
 
-const Card: FC = () => {
+const CardScheme = z.object({
+  imgUrl: z.string().url(),
+  title: z.string(),
+  hashtags: z.array(z.string()),
+  description: z.string().optional(),
+});
+
+type Card = z.infer<typeof CardScheme>;
+
+const Card: FC<Card> = ({ title, hashtags, description }) => {
   return (
-    <div className="max-w-sm overflow-hidden rounded-lg shadow-lg">
+    <article className="mx-5 mt-5 max-w-sm overflow-hidden rounded-lg bg-gray-600/50 text-gray-200 shadow ">
       <Image
         className="w-full"
         src="https://via.placeholder.com/640x360"
@@ -12,24 +23,23 @@ const Card: FC = () => {
         alt="Sunset in the mountains"
       />
       <div className="px-6 py-4">
-        <div className="mb-2 text-xl font-bold">The Coldest Sunset</div>
-        <p className="text-base text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-          molestie accumsan arcu vel scelerisque. Nullam ac enim tortor.
-        </p>
+        <div className="mb-2 text-xl font-bold">{title}</div>
+        <p className="text-base text-gray-200">{description}</p>
       </div>
-      <div className="px-6 py-4">
-        <span className="mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">
-          #photography
-        </span>
-        <span className="mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">
-          #travel
-        </span>
-        <span className="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">
-          #winter
-        </span>
+      <div className="flex flex-wrap gap-3 px-6 py-4">
+        {hashtags.map((hashtag) => {
+          return (
+            <Link
+              className="mr-2 inline-block rounded-full bg-blue-300 px-3 py-1 text-sm font-semibold text-gray-800 transition-colors hover:bg-blue-200"
+              href={`/hashtag`}
+              key={hashtag}
+            >
+              {hashtag}
+            </Link>
+          );
+        })}
       </div>
-    </div>
+    </article>
   );
 };
 export { Card };
