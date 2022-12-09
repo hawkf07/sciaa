@@ -21,10 +21,10 @@ const Home: NextPage = () => {
         isOpen={navbarIsOpen}
         onToggle={() => setNavbarIsOpen((prevState) => !prevState)}
       />
-      <main className="container flex min-h-screen p-5">
+      <main className="container flex min-h-screen  justify-center p-5">
         <Sidebar />
-        <div className="flex flex-col">
-          <div className="grid md:grid-cols-3">
+        <div className="flex flex-col ">
+          <div className="flex w-full flex-col gap-5">
             <Card
               title="Hello World"
               imgUrl="something"
@@ -38,6 +38,7 @@ const Home: NextPage = () => {
             />
           </div>
         </div>
+        <Sidebar />
       </main>
     </>
   );
