@@ -13,8 +13,8 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
-  images:{
-    domains:["via.placeholder.com"]
-  }
+  images: {
+    domains: ["via.placeholder.com", "placeholder.com"],
+  },
 };
 export default config;
