@@ -2,7 +2,9 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { FC, useState } from "react";
 import { Card } from "../components/Card";
+import { CardPost } from "../components/CardPost";
 import Navbar from "../components/Navbar";
+import { Sidebar } from "../components/Sidebar";
 
 const Home: NextPage = () => {
   const [navbarIsOpen, setNavbarIsOpen] = useState(false);
@@ -19,11 +21,25 @@ const Home: NextPage = () => {
         isOpen={navbarIsOpen}
         onToggle={() => setNavbarIsOpen((prevState) => !prevState)}
       />
-      <main className="flex min-h-screen flex-col bg-gray-200  dark:bg-gray-700">
-        <Card />
+      <main className="container flex min-h-screen p-5">
+        <Sidebar />
+        <div className="flex flex-col">
+          <div className="grid md:grid-cols-3">
+            <Card
+              title="Hello World"
+              imgUrl="something"
+              description="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+              hashtags={["something", "hello world"]}
+            />
+            <Card
+              title="Hello World"
+              imgUrl="something"
+              hashtags={["something", "hello world"]}
+            />
+          </div>
+        </div>
       </main>
     </>
   );
 };
-
 export default Home;
