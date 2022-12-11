@@ -30,7 +30,7 @@ const sidebarMenuItem = [
 export const RightSideBar: FC = () => {
   const router = useRouter();
   return (
-    <aside className="w-96 rounded bg-gray-500/20  p-3">
+    <aside className="rounded bg-gray-500/20  p-3">
       <header className="w-full p-1 text-gray-200">
         <Button variant="primary">
           <div className="inline-flex items-center justify-around gap-5">

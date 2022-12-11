@@ -28,8 +28,8 @@ const sidebarMenuItem = [
 export const LeftSidebar = () => {
   const router = useRouter();
   return (
-    <aside className="w-96 rounded bg-gray-500/20  p-3 ">
-      <div className="static">
+    <aside className="left-0 order-first h-screen w-64 rounded bg-gray-500/20  p-3 ">
+      <div className="">
         <header className="w-full p-1 text-gray-200">
           <h1 className="text-2xl">Menu</h1>
         </header>

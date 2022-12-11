@@ -14,11 +14,11 @@ type Card = z.infer<typeof CardScheme>;
 
 const Card: FC<Card> = ({ title, imgUrl, hashtags, description }) => {
   return (
-    <article className="  w-full overflow-hidden rounded-lg bg-gray-600/50 text-gray-200 shadow sm:max-w-sm md:max-w-md lg:max-w-lg ">
+    <article className=" mt-5 w-full overflow-hidden rounded-lg bg-gray-600/50 text-gray-200 shadow ">
       <figure className="w-full px-6">
         <Image
           src={imgUrl}
-          className="mx-auto "
+          className="mx-auto aspect-auto h-full max-h-full w-full max-w-full object-contain"
           width={360}
           height={360}
           alt="Sunset in the mountains"
