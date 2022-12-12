@@ -12,16 +12,18 @@ const CardScheme = z.object({
 
 type Card = z.infer<typeof CardScheme>;
 
-const Card: FC<Card> = ({ title, hashtags, description }) => {
+const Card: FC<Card> = ({ title, imgUrl, hashtags, description }) => {
   return (
-    <article className="mx-5 mt-5 max-w-sm overflow-hidden rounded-lg bg-gray-600/50 text-gray-200 shadow ">
-      <Image
-        className="w-full"
-        src="https://via.placeholder.com/640x360"
-        width={640}
-        height={360}
-        alt="Sunset in the mountains"
-      />
+    <article className=" mt-5 w-full overflow-hidden rounded-lg bg-gray-600/50 text-gray-200 shadow ">
+      <figure className="w-full px-6">
+        <Image
+          src={imgUrl}
+          className="mx-auto aspect-auto h-full max-h-full w-full max-w-full object-contain"
+          width={360}
+          height={360}
+          alt="Sunset in the mountains"
+        />
+      </figure>
       <div className="px-6 py-4">
         <div className="mb-2 text-xl font-bold">{title}</div>
         <p className="text-base text-gray-200">{description}</p>

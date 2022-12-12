@@ -14,7 +14,7 @@ type NavbarProps = {
 
 const Navbar: React.FC<NavbarProps> = ({ title, isOpen, onToggle }) => {
   return (
-    <nav className="z-40 flex w-full items-center justify-between border-b border-b-gray-400 p-2 shadow">
+    <nav className="sticky top-0 z-40 flex w-full items-center justify-between border-b border-b-gray-400 p-2 shadow">
       <Link className="text-2xl font-bold  text-gray-200" href={"/"}>
         {title}
       </Link>

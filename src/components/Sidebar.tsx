@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export const sidebarMenuItem = [
+const sidebarMenuItem = [
   {
     name: "Home",
     url: "/",
@@ -25,25 +25,27 @@ export const sidebarMenuItem = [
   },
 ];
 
-export const Sidebar = () => {
+export const LeftSidebar = () => {
   const router = useRouter();
   return (
-    <aside className="w-64 rounded bg-gray-500/20  p-3">
-      <header>
-        <h1>Menu</h1>
-      </header>
-      <div className="flex w-full flex-col gap-3">
-        {sidebarMenuItem.map((item) => (
-          <div
-            key={item.name}
-            className={`cursor-pointer rounded p-3 text-gray-100 transition-all   hover:bg-gray-600/50 ${router.asPath === item.url ? "bg-gray-700" : ""
-              }`}
-          >
-            <li>
-              <Link href={item.url}>{item.name}</Link>
-            </li>
-          </div>
-        ))}
+    <aside className="left-0 order-first h-screen w-64 rounded bg-gray-500/20  p-3 ">
+      <div className="">
+        <header className="w-full p-1 text-gray-200">
+          <h1 className="text-2xl">Menu</h1>
+        </header>
+        <div className="flex w-full flex-col gap-3">
+          {sidebarMenuItem.map((item) => (
+            <div
+              key={item.name}
+              className={`cursor-pointer rounded p-3 text-gray-100 transition-all   hover:bg-gray-600/50 ${router.asPath === item.url ? "bg-gray-700" : ""
+                }`}
+            >
+              <li>
+                <Link href={item.url}>{item.name}</Link>
+              </li>
+            </div>
+          ))}
+        </div>
       </div>
     </aside>
   );
