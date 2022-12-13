@@ -1,5 +1,6 @@
 import type { InferGetServerSidePropsType } from "next";
 import { type NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { FC, useState } from "react";
 import { Card } from "../components/Card";
@@ -7,6 +8,7 @@ import { CardPost } from "../components/CardPost";
 import Navbar from "../components/Navbar";
 import { RightSideBar } from "../components/RightSidebar";
 import { LeftSidebar } from "../components/Sidebar";
+import { trpc } from "../utils/trpc";
 
 export const getServerSideProps = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -23,7 +25,9 @@ const Home: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ data }) => {
   const [navbarIsOpen, setNavbarIsOpen] = useState(false);
+  const session = useSession();
 
+  console.log(session.data);
   return (
     <>
       <Head>
