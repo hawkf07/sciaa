@@ -6,12 +6,49 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
   // Further reading:
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
   // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
   url      = env("DATABASE_URL")
+}
+
+model Post {
+  id         String   @unique @default(cuid())
+  user       User?    @relation(fields: [userId], references: [id])
+  userId     String?
+  title      String
+  body       String?
+  votes      Int      @default(0)
+  comment    Comment? @relation(fields: [commentId], references: [id])
+  commentId  String?
+  Sub        Sub?     @relation(fields: [subId], references: [id])
+  subId      String?
+  datePosted DateTime @default(now())
+}
+
+model Sub {
+  id          String   @unique @default(cuid())
+  name        String
+  creator     User?    @relation(fields: [userId], references: [id])
+  userId      String?
+  description String
+  bannerImg   String
+  posts       Post[]
+  dateCreated DateTime @default(now())
+}
+
+model Comment {
+  id     String  @unique @default(cuid())
+  user   User?   @relation(fields: [userId], references: [id])
+  body   String
+  votes  String
+  userId String?
+  Post   Post[]
+
+  dateCreated DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Example {
@@ -55,6 +92,9 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Post          Post[]
+  Comment       Comment[]
+  Sub           Sub[]
 }
 
 model VerificationToken {
