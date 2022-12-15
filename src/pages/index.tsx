@@ -2,7 +2,15 @@ import type { InferGetServerSidePropsType } from "next";
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
-import { FC, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  EventHandler,
+  FC,
+  SetStateAction,
+  useState,
+} from "react";
+import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { CardPost } from "../components/CardPost";
 import Navbar from "../components/Navbar";
@@ -10,9 +18,15 @@ import { RightSideBar } from "../components/RightSidebar";
 import { LeftSidebar } from "../components/Sidebar";
 import { trpc } from "../utils/trpc";
 
+type Post = {
+  title: string;
+  body: string;
+  id: number;
+};
+
 export const getServerSideProps = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await response.json();
+  const data = (await response.json()) as Post[];
 
   return {
     props: {
@@ -26,7 +40,17 @@ const Home: NextPage<
 > = ({ data }) => {
   const [navbarIsOpen, setNavbarIsOpen] = useState(false);
   const session = useSession();
+  const { mutate, isLoading, isError, isSuccess } =
+    trpc.post.createPost.useMutation();
+  const [titleInput, setTitleInput] = useState("");
+  const [descriptionInput, setDescriptionInput] = useState("");
 
+  const userInputChangeHandler = (
+    evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    setValue: Dispatch<SetStateAction<string>>
+  ) => {
+    setValue(evt.target.value);
+  };
   console.log(session.data);
   return (
     <>
@@ -41,7 +65,7 @@ const Home: NextPage<
           isOpen={navbarIsOpen}
           onToggle={() => setNavbarIsOpen((prevState) => !prevState)}
         />
-        <div className="flex flex-1 flex-col gap-8 overflow-scroll sm:flex-row">
+        <div className="flex flex-1 flex-col gap-8  sm:flex-row">
           <main className="mx-auto w-full flex-1 overflow-scroll">
             {data.map((item) => {
               return (
